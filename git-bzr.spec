@@ -2,15 +2,17 @@
 # Conditional build:
 %bcond_with	tests	# perform "make test" (uses network and are slow)
 
+%define		githash	9878a30
+%define		rel		1
 Summary:	bi-directional git to bzr bridge: never fear bzr again
 Name:		git-bzr
 Version:	0.1
-Release:	1
+Release:	1.%{githash}.%{rel}
 License:	BSD-like
 Group:		Development/Languages
 # SF URL: http://downloads.sourceforge.net/%{name}/%{name}-%{version}.tar.gz
-Source0:	https://github.com/termie/git-bzr-ng/archive/master.tar.gz?/%{name}.tgz
-# Source0-md5:	773e3529f1502e458daec2ca0fbf8034
+Source0:	https://github.com/termie/git-bzr-ng/archive/%{githash}/%{name}-g%{githash}.tar.gz
+# Source0-md5:	4aae9976cda23959355da8945a88670a
 URL:		https://github.com/termie/git-bzr-ng
 BuildRequires:	rpm-pythonprov
 Requires:	bzr-fastimport >= 0.10
@@ -27,7 +29,7 @@ the examples below for basic usage.
 
 %prep
 %setup -qc
-mv git-bzr-ng-master/* .
+mv git-bzr-ng-*/* .
 
 %build
 %{?with_tests:./run_tests.sh}
